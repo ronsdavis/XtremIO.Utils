@@ -40,7 +40,7 @@ function New-XIOItem {
 		## if the item type is of "lun-map", do not need to get XIO Item Info again, as that is already done in the New-XIOLunMap call, and was $null at that point, else it would not have progressed to _this_ point
 		$oExistingXioItem = if ($ItemType_str -eq "lun-map") {$null} else {Get-XIOItemInfo @hshParamsForGetItem}
 		## if such an item already exists, write a warning and stop
-		if ($null -ne $oExistingXioItem) {Write-Warning "Item of name '$Name' and type '$ItemType_str' already exists on '$($oExistingXioItem.ComputerName -join ", ")'. Taking no action"; break;} ## end if
+		if ($null -ne $oExistingXioItem) {Write-Warning "Item of name '$Name' and type '$ItemType_str' already exists on '$($oExistingXioItem.ComputerName -join ", ")'. Taking no action"; } ## end if
 		## else, actually try to make such an object
 		else {
 			$arrXioConnectionsToUse | Foreach-Object {
@@ -299,7 +299,7 @@ function New-XIOInitiator {
 		## The existing initiator group name to which associate the initiator
 		[parameter(Mandatory=$true)][string]$InitiatorGroup,
 		## The initiator's port address.  The following rules apply:
-		#-For FC initiators, any of the following formats are allowed ("X" is a hexadecimal digit – uppercase and lower case are allowed):
+		#-For FC initiators, any of the following formats are allowed ("X" is a hexadecimal digit Â– uppercase and lower case are allowed):
 		#	XX:XX:XX:XX:XX:XX:XX:XX
 		#	XXXXXXXXXXXXXXXX
 		#	0xXXXXXXXXXXXXXXXX
